@@ -1,27 +1,20 @@
 {% extends 'base.html' %}
-{% block content %}
+{% block title %}Log In{% endblock %}
 
+{% block content %}
 <h1 class="display-4">Log In</h1>
 <p class="lead">Welcome! Please log in.</p>
-
-<form method="POST">
-
-  {{ form.hidden_tag() }}
-
-  {% for field in form
-  if field.widget.input_type != 'hidden' %}
-  <p>
-    {{ field.label }}
-    {{ field }}
-
-    {% for error in field.errors %}
-    {{ error }}
+<form method="POST" class="needs-validation" novalidate>
+    {{ form.hidden_tag() }}
+    {% for field in form if field.widget.input_type != 'hidden' %}
+    <div class="form-group">
+        {{ field.label(class="form-label") }}
+        {{ field(class="form-control") }}
+        {% for error in field.errors %}
+        <div class="invalid-feedback">{{ error }}</div>
+        {% endfor %}
+    </div>
     {% endfor %}
-  </p>
-  {% endfor %}
-
-  <button type="submit">Log In</button>
-
+    <button type="submit" class="btn btn-primary">Log In</button>
 </form>
-
 {% endblock %}

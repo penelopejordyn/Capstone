@@ -1,37 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Results</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesearch.css') }}">
-</head>
-<body>
-    <div class="vertical-header">
-        <form action="/Search_results" method="post" class="filter-form">
-            <label for="category">Category:</label>
-            <input type="text" id="category" name="search" placeholder="e.g., Chinese, Italian">
-            
-            <label for="location">Location:</label>
-            <input type="text" id="location" name="location" placeholder="e.g., New York, NY">
-            
-            <button type="submit" name="submit-filter">Apply Filters</button>
-        </form>
-    </div>
-    <div class="container">
-        <h1>Search results for '{{ searchparams }}'</h1>
-        <div class="businesses">
-            {% for business in data.businesses %}
-                <div class="business">
-                    <img src="{{ business.image_url }}" alt="{{ business.name }}" class="business-image">
-                    <div class="business-details">
-                        <h3>{{ business.name }}</h3>
-                        <p>{{ business.location.address1 }}, {{ business.location.city }}, {{ business.location.state }} {{ business.location.zip_code }}</p>
-                        <p>{{ business.display_phone }}</p>
-                    </div>
+{% extends 'base.html' %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="display-4">Search results for '{{ searchparams }}'</h1>
+    <form action="/Search_results" method="post" class="form-inline my-3">
+        <input type="text" class="form-control mr-2" id="category" name="search" placeholder="e.g., Chinese, Italian">
+        <input type="text" class="form-control mr-2" id="location" name="location" placeholder="e.g., New York, NY">
+        <button type="submit" class="btn btn-primary" name="submit-filter">Apply Filters</button>
+    </form>
+    <div class="row">
+        {% for business in data.businesses %}
+        <div class="col-md-4 my-2">
+            <div class="card">
+                <img src="{{ business.image_url }}" class="card-img-top" alt="{{ business.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ business.name }}</h5>
+                    <p class="card-text">{{ business.location.address1 }}, {{ business.location.city }}, {{ business.location.state }} {{ business.location.zip_code }}</p>
+                    <p class="card-text">{{ business.display_phone }}</p>
+                    {% if 'user_id' in session %}
+                    <form action="{{ url_for('bookmark', restaurant_id=business.id) }}" method="post">
+                        <input type="hidden" name="restaurant_name" value="{{ business.name }}">
+                        <input type="hidden" name="restaurant_image" value="{{ business.image_url }}">
+                        <input type="hidden" name="restaurant_address" value="{{ business.location.address1 }}, {{ business.location.city }}, {{ business.location.state }} {{ business.location.zip_code }}">
+                        <input type="hidden" name="restaurant_phone" value="{{ business.display_phone }}">
+                        <button type="submit" class="btn btn-primary">Bookmark</button>
+                    </form>
+                    {% endif %}
                 </div>
-            {% endfor %}
+            </div>
         </div>
+        {% endfor %}
     </div>
-</body>
-</html>
+</div>
+{% endblock %}

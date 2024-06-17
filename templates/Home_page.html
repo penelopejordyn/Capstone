@@ -1,35 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Website</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-</head>
-<body class="dark-mode">
-    <h1>Showing Resturants Near {{zip_code}}</h1>
-    <form action="/Search_results" method="post">
-        <input type="text" name="search" placeholder="Search for resturants">
-        <input type="text" name="location" placeholder="Enter city or zip">
-        <button type="submit" name="submit-search">Search</button>
-    <div class="category-container">
-        {% for category, businesses in category_businesses.items() %}
-        <div class="category">
-            <h2>{{ category }}</h2>
-            <div class="business-list">
-                {% for business in businesses %}
-                <div class="business">
-                    <h3>{{ business.name }}</h3>
-                    <img src="{{ business.image_url }}" alt="{{ business.name }}"> 
-                    <div class="business-details">
-                    <p>State: {{ business.state }},<br>City: {{ business.city }},<br>Zip Code: {{ business.zip_code }}</p>
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h1 class="display-4">Showing Restaurants Near {{ zip_code }}</h1>
+<form action="/Search_results" method="post" class="form-inline my-3">
+    <input type="text" class="form-control mr-2" name="search" placeholder="Search for restaurants">
+    <input type="text" class="form-control mr-2" name="location" placeholder="Enter city or zip">
+    <button type="submit" class="btn btn-primary" name="submit-search">Search</button>
+</form>
+<div class="category-container">
+    {% for category, businesses in category_businesses.items() %}
+    <div class="category mb-4">
+        <h2>{{ category }}</h2>
+        <div class="business-list d-flex flex-nowrap overflow-auto">
+            {% for business in businesses %}
+            <div class="business card mx-2">
+                <img src="{{ business.image_url }}" class="card-img-top" alt="{{ business.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ business.name }}</h5>
+                    <p class="card-text">State: {{ business.state }}, City: {{ business.city }}, Zip Code: {{ business.zip_code }}</p>
+                    {% if 'user_id' in session %}
+                    <form action="{{ url_for('bookmark', restaurant_id=business.id) }}" method="post">
+                        <input type="hidden" name="restaurant_id" value="{{ business.id }}">
+                        <input type="hidden" name="restaurant_name" value="{{ business.name }}">
+                        <input type="hidden" name="restaurant_image" value="{{ business.image_url }}">
+                        <input type="hidden" name="restaurant_address" value="State: {{ business.state }}, City: {{ business.city }}, Zip Code: {{ business.zip_code }}">
+                        <button type="submit" class="btn btn-primary">Bookmark</button>
+                    </form>
+                    {% endif %}
                 </div>
-                </div>
-                {% endfor %}
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
-     
-</body>
-</html>
+    {% endfor %}
+</div>
+{% endblock %}

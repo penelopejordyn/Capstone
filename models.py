@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
+from datetime import datetime
 
 db = SQLAlchemy()
 
@@ -13,7 +14,7 @@ def connect_db(app):
     db.init_app(app)
 
 
-class user(db.Model):
+class User(db.Model):
     """Site user."""
 
     __tablename__ = "users"
@@ -28,7 +29,11 @@ class user(db.Model):
 
     password = db.Column(db.Text, 
                          nullable=False)
-
+    bookmarks = db.relationship('Bookmark', 
+                                backref='user', 
+                                lazy=True)
+    
+    
     # start_register
     @classmethod
     def register(cls, username, pwd):
@@ -50,7 +55,7 @@ class user(db.Model):
         Return user if valid; else return False.
         """
 
-        u = user.query.filter_by(username=username).first()
+        u = User.query.filter_by(username=username).first()
 
         if u and bcrypt.check_password_hash(u.password, pwd):
             # return user instance
@@ -58,3 +63,13 @@ class user(db.Model):
         else:
             return False
     # end_authenticate    
+
+class Bookmark(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    restaurant_id = db.Column(db.String(100), nullable=False)
+    restaurant_name = db.Column(db.String(150), nullable=False)
+    restaurant_image = db.Column(db.String(200))
+    restaurant_address = db.Column(db.String(200))
+    restaurant_phone = db.Column(db.String(50))
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)

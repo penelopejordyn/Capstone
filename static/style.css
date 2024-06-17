@@ -1,0 +1,40 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    margin-bottom: 2em;
+}
+
+.card {
+    width: 250px;
+    flex: 0 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+    height: 150px;
+    object-fit: cover;
+}
+
+.form-inline .form-control {
+    width: auto;
+}
+
+.alert {
+    margin-top: 1em;
+}
+
+.business-list {
+    padding-bottom: 1rem;
+}
+
+.category-container {
+    overflow-x: hidden;
+}
