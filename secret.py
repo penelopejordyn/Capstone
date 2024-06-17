@@ -1,1 +1,1 @@
-Authorization = "bearer boKsjbxXpkPFrxGFLTJ4o1crJN-1eHgF7w1K2GYr2g-OSKLOvzIbgEVjdejn3pHGzOIUAjn5gvqZEUnQVlPfhjTFYYst68hiP9Zgt9EKVKs0uSNxjpDJ-mEXxV1wZnYx"
+Authorization
