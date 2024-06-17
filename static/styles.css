@@ -1,0 +1,251 @@
+.category-container {
+    display: flex;
+    flex-direction: column; /* Stack categories vertically */
+    gap: 20px; /* Optional: Adds space between categories */
+    max-height: 80vh; /* Limit the maximum height of the container to 80% of viewport height */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.category {
+    /* Additional styling for each category if needed */
+}
+
+.business-list {
+    display: flex; /* Display businesses horizontally */
+    flex-wrap: nowrap; /* Prevent wrapping of businesses */
+    gap: 20px; /* Optional: Adds space between businesses */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    padding-bottom: 10px; /* Ensure space for scrollbar */
+    margin-bottom: -10px; /* Counteract bottom padding to avoid extra space */
+    white-space: nowrap; /* Ensure businesses stay on one line */
+    
+}
+
+.business {
+    flex: 0 0 auto; /* Do not grow or shrink; maintain original size */
+    max-width: calc(20% - 20px); /* Maximum width of each business */
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 20px; /* Optional: Adds space below each business */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.business-details {
+    text-align: left; /* Align text content to the left */
+}
+
+.business img {
+    max-width: 100%; /* Ensure images do not exceed the width of their container */
+    height: auto; /* Maintain aspect ratio */
+}
+
+@media (max-width: 1200px) {
+    .business {
+        flex-basis: calc(25% - 20px); /* 4 businesses per row for smaller screens */
+        max-width: calc(25% - 20px);
+    }
+}
+
+@media (max-width: 992px) {
+    .business {
+        flex-basis: calc(33.33% - 20px); /* 3 businesses per row for even smaller screens */
+        max-width: calc(33.33% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .business {
+        flex-basis: calc(50% - 20px); /* 2 businesses per row for tablets */
+        max-width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 576px) {
+    .business {
+        flex-basis: 100%; /* 1 business per row for mobile */
+        max-width: 100%;
+    }
+}
+
+.filter-form {
+    display: flex;
+    align-items: center;
+    max-width: 300px; /* Adjust as needed */
+    margin-bottom: 20px; /* Optional: Adds space below the form */
+}
+
+.filter-button {
+    background-color: #007bff; /* Blue background color */
+    color: white; /* Text color */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.filter-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.filter-button .button-text {
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 10px; /* Space between text and icon */
+}
+
+.filter-button::after {
+    content: "";
+    display: inline-block;
+    width: 20px; /* Adjust size of icon */
+    height: 20px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><path d="M21.71 20.29l-3.52-3.52A7.955 7.955 0 0 0 20 10c0-4.41-3.59-8-8-8s-8 3.59-8 8 3.59 8 8 8a7.955 7.955 0 0 0 6.77-3.79l3.52 3.52c.39.39 1.02.39 1.41 0s.39-1.02 0-1.41zM4 10c0-3.31 2.69-6 6-6s6 2.69 6 6-2.69 6-6 6-6-2.69-6-6z"/></svg>');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: invert(1); /* Invert the color to white */
+    margin-left: 5px; /* Space between icon and text */
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #f5f5f5; /* Dark background color */
+        color: #000000; /* Light text color */
+    }
+
+    h1,
+    h2,
+    h3,
+    p,
+    input,
+    button,
+    .button-text {
+        color: #000000; /* Adjust text color */
+    }
+
+    input[type="text"],
+    input[type="submit"],
+    button {
+        background-color: #efdddd; /* Darker background for inputs and buttons */
+        border-color: #efdddd; /* Matching border color */
+        color: #000000; /* Text color */
+    }
+
+    input[type="text"]::placeholder {
+        color: #7b7b7b; /* Placeholder text color */
+    }
+
+    .filter-button {
+        background-color: #007bff; /* Blue background color */
+        color: #fff; /* Text color */
+    }
+
+    .filter-button:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
+
+    .filter-button .button-text {
+        color: #fff; /* Button text color */
+    }
+
+    .filter-button::after {
+        filter: invert(0); /* Adjust icon color */
+    }
+}
+
+/* Default light mode styles (already existing) */
+
+/* Dark mode styles */
+.dark-mode {
+    background-color: #f6f6f6; /* Dark background color */
+    color: #ffffff; /* Light text color */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font stack */
+
+    /* Additional modern text styles */
+    line-height: 1.6; /* Improved line height for readability */
+}
+
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3 {
+    color: #505050; /* Heading text color */
+    font-weight: bold; /* Bold headings */
+}
+
+.dark-mode p {
+    color: #484848; /* Lighter paragraph text color */
+    font-size: 16px; /* Adjust paragraph font size */
+}
+
+.dark-mode input[type="text"],
+.dark-mode input[type="submit"],
+.dark-mode button {
+    background-color: #f7f7f7; /* Darker background for inputs and buttons */
+    border-color: #000000; /* Matching border color */
+    color: #000000; /* Text color */
+    padding: 10px 20px; /* Improved padding for inputs and buttons */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.dark-mode button:hover{
+    background-color: rgb(154, 154, 255);
+}
+
+.dark-mode input[type="text"]::placeholder {
+    color: #6e6e6e; /* Placeholder text color */
+}
+
+.dark-mode .filter-button {
+    background-color: #007bff; /* Blue background color */
+    color: #ffffff; /* Text color */
+    padding: 10px 20px; /* Improved padding for filter buttons */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.dark-mode .filter-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.dark-mode .filter-button .button-text {
+    font-size: 16px; /* Adjust button text size */
+    font-weight: bold; /* Bold button text */
+    margin-right: 10px; /* Space between text and icon */
+}
+
+.dark-mode .filter-button::after {
+    content: "";
+    display: inline-block;
+    width: 20px; /* Adjust size of icon */
+    height: 20px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><path d="M21.71 20.29l-3.52-3.52A7.955 7.955 0 0 0 20 10c0-4.41-3.59-8-8-8s-8 3.59-8 8 3.59 8 8 8a7.955 7.955 0 0 0 6.77-3.79l3.52 3.52c.39.39 1.02.39 1.41 0s.39-1.02 0-1.41zM4 10c0-3.31 2.69-6 6-6s6 2.69 6 6-2.69 6-6 6-6-2.69-6-6z"/></svg>');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: invert(1); /* Invert the color to white */
+    margin-left: 5px; /* Space between icon and text */
+}
+
+.dark-mode ::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+}
+
+.dark-mode ::-webkit-scrollbar-track {
+    background: #333333; /* Track color */
+}
+
+.dark-mode ::-webkit-scrollbar-thumb {
+    background-color: #666666; /* Thumb color */
+    border-radius: 5px; /* Rounded corners */
+}
+
+

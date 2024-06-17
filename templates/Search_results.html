@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesearch.css') }}">
+</head>
+<body>
+    <div class="vertical-header">
+        <form action="/Search_results" method="post" class="filter-form">
+            <label for="category">Category:</label>
+            <input type="text" id="category" name="search" placeholder="e.g., Chinese, Italian">
+            
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" placeholder="e.g., New York, NY">
+            
+            <button type="submit" name="submit-filter">Apply Filters</button>
+        </form>
+    </div>
+    <div class="container">
+        <h1>Search results for '{{ searchparams }}'</h1>
+        <div class="businesses">
+            {% for business in data.businesses %}
+                <div class="business">
+                    <img src="{{ business.image_url }}" alt="{{ business.name }}" class="business-image">
+                    <div class="business-details">
+                        <h3>{{ business.name }}</h3>
+                        <p>{{ business.location.address1 }}, {{ business.location.city }}, {{ business.location.state }} {{ business.location.zip_code }}</p>
+                        <p>{{ business.display_phone }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
