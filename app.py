@@ -100,8 +100,9 @@ def register():
         pwd = form.password.data
 
         nuser = user.register(name, pwd)
-        db.session.add(nuser)
-        db.session.commit()
+        with app.app_context():
+            db.session.add(nuser)
+            db.session.commit()
 
         session["user_id"] = user.id
 
